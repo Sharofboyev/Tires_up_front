@@ -53,19 +53,26 @@ class TodoContainer extends React.Component {
     handleSubmit = (title) => {
       const newTodo = {
         title: title,
-        id: 4,
+        id: this.state.counter + 1,
         completed: false,
       }
       this.setState({
-        todos: [...this.state.todos, newTodo]
+        todos: [...this.state.todos, newTodo],
+        counter: this.state.counter + 1
       })
     }
     render() {
         return (
-          <div>
-            <Header/>
-            <InputToDo handleSubmit={this.handleSubmit}/>
-            <TodosList todos={this.state.todos} handleChangeProps={this.handleChange} deleteTodoProps={this.delTodo}/>
+          <div className="container">
+            <div className="inner">
+              <Header />
+              <InputToDo handleSubmit={this.handleSubmit} />
+              <TodosList 
+                todos={this.state.todos} 
+                handleChangeProps={this.handleChange} 
+                deleteTodoProps={this.delTodo} 
+              />
+            </div>
           </div>
         );
     }

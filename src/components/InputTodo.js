@@ -10,24 +10,29 @@ class InputToDo extends React.Component{
     };
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.title);
-        this.setState({
-            title: ""
-        })
+        if (this.state.title.trim()){
+            this.props.handleSubmit(this.state.title.trim());
+            this.setState({
+                title: ""
+            })
+        }
+        else alert("Please, write item")
     };
     render(){
         return (
             <form
                 onSubmit={this.handleSubmit}
+                className="form-container"
             >
                 <input 
                     type="text" 
+                    className="input-text"
                     placeholder="Add Todo..." 
                     value={this.state.title} 
                     onChange={this.onChange}
                     name="title"
                 />
-                <button>Submit</button>
+                <button className="input-submit">Submit</button>
             </form>
         )
     }
