@@ -7,7 +7,7 @@ export class Row extends React.Component{
         super(props);
         this.state = {
             marked: false,
-            done: this.props.row.marked,
+            done: this.props.row.Bajarildi,
             hovered: false,
             collapsed: true
         }
@@ -41,10 +41,10 @@ export class Row extends React.Component{
             key={this.props.id}
         >
             {Object.keys(this.props.row).map((key) => {
-                if (key === "marked"){
+                if (key === "Bajarildi"){
                     return <Cell 
                         value={this.props.row[key]} 
-                        key={this.id++} 
+                        key={this.id++}
                         done={this.state.done} 
                         PVI={this.props.id}
                         onButtonClickHandler={this.onButtonClickHandler} 
@@ -70,8 +70,15 @@ export class Row extends React.Component{
             })}
         </tr>,
             !this.state.collapsed && <tr key={this.props.PVI + "collapser"}>
-                <td colSpan={Object.keys(this.props.row).length} key={this.id++} className="Expanded">
-                    {this.props.row.Time.toString()}
+                <td 
+                    colSpan={Object.keys(this.props.row).length} 
+                    key={this.id++} 
+                    className="Expanded"
+                    style={{
+                        "fontSize": "25px"
+                    }}
+                >
+                    {this.props.row.Time}
                 </td>
             </tr>
         ]

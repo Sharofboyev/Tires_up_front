@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import Table from "./components/Table";
-import {getData} from "./components/Util";
+import {getData, timeFormat} from "./components/Util";
 
 function App() {
     const [items, setItems] = useState([])
@@ -11,8 +11,8 @@ function App() {
         Picker: row => row.CSN,
       },
       {
-        Header: "marked",
-        Picker: row => row.marked
+        Header: "Bajarildi",
+        Picker: row => row.Bajarildi === "True"
       },
       {
         Header: "PONO",
@@ -48,14 +48,14 @@ function App() {
       },
       {
         Header: "Time",
-        Picker: row => new Date()
+        Picker: row => timeFormat(new Date(1659121200000))
       }
     ]
     useEffect(() => {
         getData().then((data) => {
           // console.log(data)
           setItems(data);
-      })
+        })
      },[]);
   return (
     <div className="App">
