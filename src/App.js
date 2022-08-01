@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import Table from "./components/Table";
 import {getData} from "./components/Util";
 
@@ -51,9 +51,12 @@ function App() {
         Picker: row => new Date()
       }
     ]
-  getData().then((data) => {
-    setItems(data);
-  })
+    useEffect(() => {
+        getData().then((data) => {
+          // console.log(data)
+          setItems(data);
+      })
+     },[]);
   return (
     <div className="App">
         <Table items={items} setItems={setItems} columns={columns}/>

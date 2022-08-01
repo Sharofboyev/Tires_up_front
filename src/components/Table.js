@@ -21,7 +21,7 @@ class Table extends React.Component{
                     readyRow[this.props.columns[i].Header] = this.props.columns[i].Picker(item)
                 }
                 return (
-                    <Row row={readyRow} key={item.PVI}/>
+                    <Row row={readyRow} id={item.PVI} key={item.PVI}/>
                 )
             })}
             </tbody>

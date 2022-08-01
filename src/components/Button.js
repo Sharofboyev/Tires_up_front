@@ -1,5 +1,6 @@
 import React from "react";
 import "./Button.css"
+import {instance} from "./Util"
 
 class Button extends React.Component{
     constructor(props){
@@ -13,12 +14,12 @@ class Button extends React.Component{
         this.setState({
             disabled: true
         });
-        await (new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve();
-            }, 2000);
-        }))
-        this.props.onButtonClickHandler()
+        try {
+            let resp = await instance.put("/row", {pvi: Number(this.props.PVI), marked: !this.props.done})
+            console.log(resp.data)
+            this.props.onButtonClickHandler()
+        }catch (err){
+        }
         this.setState({
             disabled: false
         });

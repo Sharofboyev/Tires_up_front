@@ -38,7 +38,7 @@ export class Row extends React.Component{
             className="Row" 
             onClick={this.onClickHandler} 
             style={this.state.marked?{backgroundColor: "rgb(245, 215, 105)"}:(this.state.done?{backgroundColor: "rgb(141, 184, 124)", color: "rgb( 245, 215, 105)"}:{})}
-            key={this.props.row.PVI}
+            key={this.props.id}
         >
             {Object.keys(this.props.row).map((key) => {
                 if (key === "marked"){
@@ -46,6 +46,7 @@ export class Row extends React.Component{
                         value={this.props.row[key]} 
                         key={this.id++} 
                         done={this.state.done} 
+                        PVI={this.props.id}
                         onButtonClickHandler={this.onButtonClickHandler} 
                         columnName={key}
                     />

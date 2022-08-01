@@ -1,7 +1,7 @@
 import axios from "axios";
 const instance = axios.create({
     baseURL: "http://localhost:2022/",
-    timeout: 5000
+    timeout: 15000
 })
 
 async function getData(){
@@ -18,4 +18,4 @@ async function getData(){
     }
 }
 
-export {getData}
+export {getData, instance}
