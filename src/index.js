@@ -1,10 +1,7 @@
-import React from "react"
-import ReactDOM from "react-dom"
-//component file
-import TodoContainer from "./components/TodoContainer"
+import React from "react";
+import { render } from "react-dom";
+import "./index.css";
+// Import React Table
+import App from "./App";
 
-import "./App.css"
-
-ReactDOM.render(<React.StrictMode>
-    <TodoContainer />
-  </React.StrictMode>, document.getElementById("root"))
+render(<App />, document.getElementById("root"));

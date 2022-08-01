@@ -1,14 +1,15 @@
-import React from "react";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import SelectTableComponent from "./select-table.component";
-
-export default function App() {
+import React, {useState} from "react"
+import Table from "./components/Table"
+function App() {
+    const [items, setItems] = useState([
+        {PVI: 1, name: "Sarvar", surname: "Sharofboyev", marked: 0},
+        {PVI: 2, name: "Abdulla", surname: "Qodirov", marked: 0},
+        {PVI: 3, name: "Sherali", surname: "Jo'rayev", marked: 1}
+    ]) 
   return (
-    <div className="container">
-      <h1>React Table with Rows Selection Single/ Multiple : FeakyJolly.com</h1>
-
-      <SelectTableComponent />
+    <div className="App">
+        <Table items={items} setItems={setItems}/>
     </div>
-  );
+  )
 }
+export default App
