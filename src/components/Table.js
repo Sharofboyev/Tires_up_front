@@ -6,7 +6,7 @@ class Table extends React.Component{
         return (<table className="Table">
             <tbody>{this.props.items.map(element => {
                 return (
-                    <Row row={element} key={element.id}/>
+                    <Row row={element} key={element.PVI}/>
                 )
             })}
             </tbody>

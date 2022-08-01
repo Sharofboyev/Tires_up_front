@@ -6,10 +6,10 @@ export class Cell extends React.Component {
         return (
             <td className="Cell"
                 style={{
-                    "width": this.props.columnName === "bajarildi"?"100px":""
+                    "width": this.props.columnName === "marked"?"100px":""
                 }}
             >
-                {this.props.columnName === "bajarildi"?
+                {this.props.columnName === "marked"?
                     <Button 
                         done={this.props.done} 
                         onButtonClickHandler={this.props.onButtonClickHandler}

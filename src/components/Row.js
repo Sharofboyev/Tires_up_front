@@ -6,7 +6,7 @@ export class Row extends React.Component{
         super(props);
         this.state = {
             marked: false,
-            done: this.props.row.bajarildi,
+            done: this.props.row.marked,
             hovered: false
         }
     }
@@ -32,11 +32,16 @@ export class Row extends React.Component{
             className="Row" 
             onClick={this.onClickHandler} 
             style={this.state.marked?{backgroundColor: "rgb(44, 95, 45)", color: "rgb(255, 231, 122)"}:{}}
-            onMouseOver={this.onHoverHandler}
         >
             {Object.keys(this.props.row).map((key) => {
-                if (key === "bajarildi"){
-                    return <Cell value={this.props.row[key]} key={this.id++} done={this.state.done} onButtonClickHandler={this.onButtonClickHandler} columnName={key}></Cell>
+                if (key === "marked"){
+                    return <Cell 
+                        value={this.props.row[key]} 
+                        key={this.id++} 
+                        done={this.state.done} 
+                        onButtonClickHandler={this.onButtonClickHandler} 
+                        columnName={key}
+                    />
                 }
                 return (
                     <Cell value={this.props.row[key]} key={this.id++} columnName={key}></Cell>

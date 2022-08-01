@@ -2,9 +2,9 @@ import React, {useState} from "react"
 import Table from "./components/Table"
 function App() {
     const [items, setItems] = useState([
-        {id: 1, name: "Sarvar", surname: "Sharofboyev", bajarildi: false},
-        {id: 2, name: "Abdulla", surname: "Qodirov", bajarildi: false},
-        {id: 3, name: "Sherali", surname: "Jo'rayev", bajarildi: true}
+        {PVI: 1, name: "Sarvar", surname: "Sharofboyev", marked: 0},
+        {PVI: 2, name: "Abdulla", surname: "Qodirov", marked: 0},
+        {PVI: 3, name: "Sherali", surname: "Jo'rayev", marked: 1}
     ]) 
   return (
     <div className="App">
