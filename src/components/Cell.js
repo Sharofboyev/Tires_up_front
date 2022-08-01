@@ -6,7 +6,7 @@ export class Cell extends React.Component {
         return (
             <td className="Cell"
                 style={{
-                    "width": this.props.columnName === "marked"?"100px":""
+                    "width": this.props.columnName === "marked"?"100px":(this.props.width?this.props.width:"")
                 }}
             >
                 {this.props.columnName === "marked"?
