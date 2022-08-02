@@ -15,7 +15,7 @@ export class Row extends React.Component{
     id = 1
     onClickHandler = () => {
         this.setState({
-            marked: !this.state.marked
+            marked: !this.state.done && !this.state.marked
         })
     }
 
@@ -28,9 +28,11 @@ export class Row extends React.Component{
 
     handleCollapseClick = (event) => {
         event.stopPropagation()
-        this.setState({
-            collapsed: !this.state.collapsed
-        })
+        if (this.state.done){
+            this.setState({
+                collapsed: !this.state.collapsed
+            })
+        }
     }
     render(){
         return [
@@ -55,8 +57,8 @@ export class Row extends React.Component{
                         value={
                             <Image 
                                 handleCollapseClick={this.handleCollapseClick}
-                                width="20px"
-                                height="20px"
+                                width="50px"
+                                height="50px"
                             />
                         } 
                         key={this.id++} 
@@ -69,13 +71,14 @@ export class Row extends React.Component{
                 )
             })}
         </tr>,
-            !this.state.collapsed && <tr key={this.props.PVI + "collapser"}>
+            this.state.done && !this.state.collapsed && <tr key={this.props.PVI + "collapser"}>
                 <td 
                     colSpan={Object.keys(this.props.row).length} 
                     key={this.id++} 
                     className="Expanded"
                     style={{
-                        "fontSize": "25px"
+                        "fontSize": "40px",
+                        "fontWeight": "500"
                     }}
                 >
                     {this.props.row.Time}

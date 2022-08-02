@@ -19,6 +19,7 @@ class Button extends React.Component{
             console.log(resp.data)
             this.props.onButtonClickHandler()
         }catch (err){
+            
         }
         this.setState({
             disabled: false

@@ -36,7 +36,7 @@ class Image extends React.Component {
   
       return (
         <img
-          src={require("./collapse.png")}
+          src={!this.state.toggle ? require("./collapse.png"): require("./collapseRotated.png")}
           ref={elm => {
             this.image = elm;
           }}
@@ -44,7 +44,7 @@ class Image extends React.Component {
           onClick={this.onClickHandler}
           width={this.props.width}
           height={this.props.height}
-          className={rotate ? "rotate" : ""}
+          className={rotate ? "rotate" : "rotateReverse"}
         />
       );
     }

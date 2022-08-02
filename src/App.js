@@ -31,7 +31,7 @@ function App() {
         Picker: row => row.OF_TRIM_LEVEL,
       },
       {
-        Header: "CONDITION1",
+        Header: "C1",
         Picker: row => row.CONDITION1,
       },
       {
@@ -43,12 +43,20 @@ function App() {
         Picker: row => row.K06A,
       },
       {
-        Header: "CONDITION2",
+        Header: "K01",
+        Picker: row => row.K01,
+      },
+      {
+        Header: "C2",
         Picker: row => row.CONDITION2,
       },
       {
+        Header: "S102",
+        Picker: row => row.S102,
+      },
+      {
         Header: "Time",
-        Picker: row => timeFormat(new Date(1659121200000))
+        Picker: row => timeFormat(new Date())
       }
     ]
     useEffect(() => {
