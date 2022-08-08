@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment"
 
 const instance = axios.create({
-    baseURL: "http://122.212.70.218:2022/",
+    baseURL: "http://10.142.61.149:2022/",
     timeout: 15000
 })
 
