@@ -1,15 +1,15 @@
 import React from "react";
 import { Cell } from "./Cell";
-import Image from "./Image";
+import {getMarkedTimes, timeFormat} from "./Util"
 
-export class Row extends React.Component{
+class Row extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             marked: false,
             done: this.props.row.Bajarildi,
-            hovered: false,
-            collapsed: true
+            collapsed: true,
+            times: this.props.row.Time,
         }
     }
     id = 1
@@ -22,68 +22,76 @@ export class Row extends React.Component{
     onButtonClickHandler = () => {
         this.setState({
             done: !this.state.done,
-            marked: false
+            marked: false,
+            collapsed: true
         })
     }
 
-    handleCollapseClick = (event) => {
+    handleCollapseClick = async (event) => {
         event.stopPropagation()
-        if (this.state.done){
+        getMarkedTimes(this.props.id).then((data) => {
             this.setState({
+                times: data,
                 collapsed: !this.state.collapsed
             })
-        }
+        })
     }
     render(){
         return [
-        <tr 
-            className="Row" 
-            onClick={this.onClickHandler} 
-            style={this.state.marked?{backgroundColor: "rgb(245, 215, 105)"}:(this.state.done?{backgroundColor: "rgb(141, 184, 124)", color: "rgb( 245, 215, 105)"}:{})}
-            key={this.props.id}
-        >
-            {Object.keys(this.props.row).map((key) => {
-                if (key === "Bajarildi"){
-                    return <Cell 
-                        value={this.props.row[key]} 
-                        key={this.id++}
-                        done={this.state.done} 
-                        PVI={this.props.id}
-                        onButtonClickHandler={this.onButtonClickHandler} 
-                        columnName={key}
-                    />
-                } else if (key === "Time"){
-                    return <Cell
-                        value={
-                            <Image 
-                                handleCollapseClick={this.handleCollapseClick}
-                                width="50px"
-                                height="50px"
-                            />
-                        } 
-                        key={this.id++} 
-                        width="35px"
-                        columnName={key}
-                    />
-                }
-                return (
-                    <Cell value={this.props.row[key]} key={this.id++} columnName={key}></Cell>
-                )
-            })}
-        </tr>,
-            this.state.done && !this.state.collapsed && <tr key={this.props.PVI + "collapser"}>
-                <td 
-                    colSpan={Object.keys(this.props.row).length} 
-                    key={this.id++} 
-                    className="Expanded"
-                    style={{
-                        "fontSize": "40px",
-                        "fontWeight": "500"
-                    }}
-                >
-                    {this.props.row.Time}
-                </td>
-            </tr>
+            <tr 
+                className="Row" //Class name CSS da qo'llash uchun kerak
+                onClick={this.onClickHandler}  //Row bosilganda, marked state o'zgarishi va Row component re-render bo'lishi kerak
+                //Style row belgilangani yoki bajarilganiga qarab boshqacha background color olishi mumkin
+                style={this.state.marked?{backgroundColor: "rgb(245, 215, 105)"}:(this.state.done?{backgroundColor: "rgb(141, 184, 124)", color: "rgb( 245, 215, 105)"}:{})}
+                //Har qanday array item key propertyga ega bo'lishi kerak
+                key={this.props.id}
+            >
+                {Object.keys(this.props.row).map((key) => {
+                    if (key === "Bajarildi"){
+                        return <Cell 
+                            value={this.props.row[key]} 
+                            key={this.id++}
+                            done={this.state.done} 
+                            PVI={this.props.id}
+                            onButtonClickHandler={this.onButtonClickHandler} 
+                            columnName={key}
+                        />
+                    } else if (key === "Time"){
+                        return <Cell
+                            value={this.props.row[key]} 
+                            key={this.id++} 
+                            width="35px"
+                            columnName={key}
+                            collapsed={this.state.collapsed}
+                            handleCollapseClick={this.handleCollapseClick}
+                        />
+                    }
+                    return (
+                        <Cell value={this.props.row[key]} key={this.id++} columnName={key}></Cell>
+                    )
+                })}
+            </tr>,
+            this.state.times.length > 0 && !this.state.collapsed && (
+                this.state.times.map((time, index) => {
+                    return <tr key={(this.id++) + "collapser"}>
+                        <td 
+                            colSpan={Object.keys(this.props.row).length}
+                            key={this.id++}
+                            className="Expanded"
+                            style={{
+                                "fontSize": "40px",
+                                "fontWeight": "500",
+                                whiteSpace: "pre",
+                                backgroundColor: index % 2 === 0? "#8F9AA5": ""
+                            }}
+                        >
+                            {(index % 2 === 0? "Bajarildi        ": "Qaytarildi      ")+ timeFormat(time.Vaqt)}
+                        </td>
+                    </tr>
+                })
+            )
         ]
     }
 }
+
+export default Row

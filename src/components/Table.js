@@ -1,12 +1,11 @@
 import React from "react";
-import { Row } from "./Row";
+import Row from "./Row";
 
-class Table extends React.Component{
-    render(){
-        return (<table className="Table">
+function Table(props){
+    return (<table className="Table">
             <thead>
                 <tr>
-                    {this.props.columns.map(item => {
+                    {props.columns.map(item => {
                         return (
                             <th key={item.Header}>
                                 {item.Header === "Time"?"":item.Header}
@@ -15,10 +14,10 @@ class Table extends React.Component{
                     })}
                 </tr>
             </thead>
-            <tbody>{this.props.items.map(item => {
+            <tbody>{props.items.map(item => {
                 let readyRow = {};
-                for (let i = 0; i < this.props.columns.length; i++){
-                    readyRow[this.props.columns[i].Header] = this.props.columns[i].Picker(item)
+                for (let i = 0; i < props.columns.length; i++){
+                    readyRow[props.columns[i].Header] = props.columns[i].Picker(item)
                 }
                 return (
                     <Row row={readyRow} id={item.PVI} key={item.PVI}/>
@@ -26,7 +25,6 @@ class Table extends React.Component{
             })}
             </tbody>
         </table>)
-    }
 }
 
 export default Table

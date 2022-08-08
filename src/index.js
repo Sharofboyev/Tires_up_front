@@ -1,7 +1,8 @@
-import React from "react";
-import { render } from "react-dom";
+import React, { StrictMode } from "react";
+import reactDom from "react-dom/client";
 import "./index.css";
 // Import React Table
 import App from "./App";
 
-render(<App />, document.getElementById("root"));
+const root = reactDom.createRoot(document.getElementById("root"))
+root.render(<StrictMode><App /></StrictMode>);

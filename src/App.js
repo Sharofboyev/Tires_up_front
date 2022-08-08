@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import Table from "./components/Table";
-import {getData, timeFormat} from "./components/Util";
+import {getData} from "./components/Util";
 
 function App() {
     const [items, setItems] = useState([])
@@ -56,7 +56,7 @@ function App() {
       },
       {
         Header: "Time",
-        Picker: row => timeFormat(new Date())
+        Picker: row => []
       }
     ]
     useEffect(() => {
