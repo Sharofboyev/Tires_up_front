@@ -16,8 +16,7 @@ class Button extends React.Component{
         });
         try {
             let resp = await instance.put("/row", {pvi: Number(this.props.PVI), marked: !this.props.done})
-            console.log(resp.data)
-            this.props.onButtonClickHandler()
+            this.props.onButtonClickHandler(resp.data)
         }catch (err){
             
         }

@@ -19,8 +19,9 @@ class Row extends React.Component{
         })
     }
 
-    onButtonClickHandler = () => {
+    onButtonClickHandler = (markedTime) => {
         this.setState({
+            times: [...this.state.times, markedTime],
             done: !this.state.done,
             marked: false,
             collapsed: true
@@ -29,12 +30,15 @@ class Row extends React.Component{
 
     handleCollapseClick = async (event) => {
         event.stopPropagation()
-        getMarkedTimes(this.props.id).then((data) => {
-            this.setState({
-                times: data,
-                collapsed: !this.state.collapsed
+        if (this.state.collapsed && this.state.times.length === 0){
+            getMarkedTimes(this.props.id).then((data) => {
+                this.setState({
+                    times: data,
+                    collapsed: !this.state.collapsed
+                })
             })
-        })
+        }
+        else this.setState({collapsed: !this.state.collapsed})
     }
     render(){
         return [
@@ -85,7 +89,12 @@ class Row extends React.Component{
                                 backgroundColor: index % 2 === 0? "#8F9AA5": ""
                             }}
                         >
-                            {(index % 2 === 0? "Bajarildi        ": "Qaytarildi      ")+ timeFormat(time.Vaqt)}
+                            {   
+                                //Backenddan [{Joy: string, Vaqt: string}] ma'lumot keladi. Joy 't2tire' yoki 'tushdi' bo'lishi mumkin.
+                                //Tushdi bo'lgan vaqtda, shu vaqt chiqishi kerak, qolganlari juft toqligiga qarab bajarildi, qaytarildi bo'ladi
+                                (time.Joy === "tushdi" ? "Tushdi     ": (index % 2 !== 0? "Bajarildi        ": "Qaytarildi      "))  
+                                    + timeFormat(time.Vaqt)
+                            }
                         </td>
                     </tr>
                 })
