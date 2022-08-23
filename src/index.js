@@ -4,6 +4,10 @@ import "./index.css";
 // Import React Table
 import App from "./App";
 
-
-const root = reactDom.createRoot(document.getElementById("root"))
-root.render(<StrictMode><App /></StrictMode>);
+console.log(process.env);
+const root = reactDom.createRoot(document.getElementById("root"));
+root.render(
+    <StrictMode>
+        <App />
+    </StrictMode>
+);
