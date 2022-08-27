@@ -1,6 +1,6 @@
 const Thead = ({ columns }) => {
   return (
-    <thead>
+    <thead className="Thead">
       <tr>
         {columns.map((column) => {
           return (

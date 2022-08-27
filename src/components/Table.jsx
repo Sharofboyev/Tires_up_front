@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Row from "./Row";
 import Thead from "./Thead";
-import { getData } from "./Util";
+import { getData, getRawData } from "../utils/Util";
 
 const columns = [
   {
@@ -61,8 +61,7 @@ const columns = [
 function Table() {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    getData().then((data) => {
-      // console.log(data)
+    getRawData().then((data) => {
       setItems(data);
     });
   }, []);

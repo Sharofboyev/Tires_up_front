@@ -1,6 +1,6 @@
 import React from "react";
 import "./Button.css";
-import { instance } from "./Util";
+import { instance } from "../utils/Util";
 
 class Button extends React.Component {
   constructor(props) {

@@ -1,8 +1,12 @@
 body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: 300;
-    font-size: 14px;
-  }
+}
+
+.navbar{
+  padding-bottom: 0.7em;
+  font-size: 2em;
+}
   
 table { 
     border-spacing: 1; 
@@ -18,10 +22,11 @@ table {
     padding-left:8px,
   }
   thead tr{
-    height:60px;
-      background:#FFED86;
-      font-size: 17px;
-      border: 1px solid black;
+    height: 3em;
+    background:#FFED86;
+    font-size: 1.7em;
+    border: 1px solid black;
+    text-align: center;
   }
 
   tbody tr{

@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import data from "./rawData.json";
 
 const instance = axios.create({
   baseURL: "http://localhost:2022/",
@@ -62,4 +63,12 @@ async function getMarkedTimes(PVI) {
   }
 }
 
-export { getData, instance, timeFormat, getMarkedTimes };
+function getRawData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 1000);
+  });
+}
+
+export { getData, instance, timeFormat, getMarkedTimes, getRawData };
