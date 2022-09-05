@@ -28,7 +28,7 @@ class NavBar extends Component {
                   className="nav-link"
                   to={"/"}
                 >
-                  Navbar
+                  Views
                 </NavLink>
               </li>
               <li className="nav-item">

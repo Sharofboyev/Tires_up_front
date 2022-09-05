@@ -1,6 +1,6 @@
 import React from "react";
 import "./Button.css";
-import { instance } from "../utils/Util";
+import { markRow } from "../utils/Util";
 
 class Button extends React.Component {
   constructor(props) {
@@ -15,10 +15,7 @@ class Button extends React.Component {
       disabled: true,
     });
     try {
-      let resp = await instance.put("/row", {
-        pvi: Number(this.props.PVI),
-        marked: !this.props.done,
-      });
+      let resp = await markRow("tiresecond", this.props.id, !this.props.done);
       this.props.onButtonClickHandler(resp.data);
     } catch (err) {}
     this.setState({

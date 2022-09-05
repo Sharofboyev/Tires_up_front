@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Table from "./components/Table";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import { columns, getData } from "./utils/Util";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    getData().then((data) => {
+      setItems(data);
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <NavBar></NavBar>
       <Routes>
         <Route
           path="/"
-          element={<Home></Home>}
+          element={<AdminPanel></AdminPanel>}
         />
         <Route
           path="/about"
@@ -18,7 +27,12 @@ function App() {
         />
         <Route
           path="/tiresecond"
-          element={<Table />}
+          element={
+            <Table
+              columns={columns}
+              items={items}
+            />
+          }
         />
         <Route
           path="/drop"
@@ -26,14 +40,6 @@ function App() {
         />
       </Routes>
     </BrowserRouter>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Main page</h2>
-    </div>
   );
 }
 

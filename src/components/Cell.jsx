@@ -10,7 +10,7 @@ export class Cell extends React.Component {
           <Button
             done={this.props.done}
             onButtonClickHandler={this.props.onButtonClickHandler}
-            PVI={this.props.PVI}
+            id={this.props.id}
           />
         ) : this.props.columnName === "Time" ? (
           <Image

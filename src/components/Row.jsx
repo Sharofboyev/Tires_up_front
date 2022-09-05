@@ -65,7 +65,7 @@ class Row extends React.Component {
                 value={this.props.row[key]}
                 key={this.id++}
                 done={this.state.done}
-                PVI={this.props.id}
+                id={this.props.id}
                 onButtonClickHandler={this.onButtonClickHandler}
                 columnName={key}
               />
@@ -81,7 +81,7 @@ class Row extends React.Component {
                 handleCollapseClick={this.handleCollapseClick}
               />
             );
-          }
+          } else if (key === "id") return null;
           return (
             <Cell
               value={this.props.row[key]}

@@ -44,3 +44,7 @@ table {
 .Expanded {
   text-align: right
 }
+
+.Query-Form {
+  font-size: 15px;
+}

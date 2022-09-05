@@ -1,6 +1,7 @@
 import axios from "axios";
 import moment from "moment";
 import data from "./rawData.json";
+import views from "./views.json";
 
 const instance = axios.create({
   baseURL: "http://localhost:2022/",
@@ -9,7 +10,7 @@ const instance = axios.create({
 
 async function getData() {
   try {
-    let resp = await instance.get("/rows");
+    let resp = await instance.get("/tiresecond/rows");
     let data = resp.data.sort((a, b) => {
       return a.CSN > b.CSN;
     });
@@ -55,7 +56,7 @@ function timeFormat(date) {
 
 async function getMarkedTimes(PVI) {
   try {
-    let resp = await instance.get("/time", { params: { pvi: PVI } });
+    let resp = await instance.get("/tiresecond/time", { params: { pvi: PVI } });
     return resp.data;
   } catch (err) {
     console.log(err.message);
@@ -71,4 +72,102 @@ function getRawData() {
   });
 }
 
-export { getData, instance, timeFormat, getMarkedTimes, getRawData };
+function getRawViews() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(views);
+    }, 1000);
+  });
+}
+
+async function getViews() {
+  try {
+    let resp = await instance.get("/view");
+    let data = resp.data.sort((a, b) => {
+      return a.CSN > b.CSN;
+    });
+    return data;
+  } catch (err) {
+    console.log(err.message);
+    return [];
+  }
+}
+
+async function markRow(viewName, pvi, done) {
+  let resp = await instance.put(`${viewName}/row`, {
+    pvi: Number(pvi),
+    marked: done,
+  });
+  return resp;
+}
+
+const columns = [
+  {
+    Header: "id",
+    Picker: (row) => row.PVI,
+  },
+  {
+    Header: "CSN",
+    Picker: (row) => row.CSN,
+  },
+  {
+    Header: "Bajarildi",
+    Picker: (row) => row.Bajarildi === "True",
+  },
+  {
+    Header: "PONO",
+    Picker: (row) => row.PONO,
+  },
+  {
+    Header: "F08A",
+    Picker: (row) => row.F08A,
+  },
+  {
+    Header: "DEST",
+    Picker: (row) => row.DEST,
+  },
+  {
+    Header: "OF_TRIM_LEVEL",
+    Picker: (row) => row.OF_TRIM_LEVEL,
+  },
+  {
+    Header: "C1",
+    Picker: (row) => row.CONDITION1,
+  },
+  {
+    Header: "K04A",
+    Picker: (row) => row.K04A,
+  },
+  {
+    Header: "K06A",
+    Picker: (row) => row.K06A,
+  },
+  {
+    Header: "K01",
+    Picker: (row) => row.K01,
+  },
+  {
+    Header: "C2",
+    Picker: (row) => row.CONDITION2,
+  },
+  {
+    Header: "S102",
+    Picker: (row) => row.S102,
+  },
+  {
+    Header: "Time",
+    Picker: (row) => [],
+  },
+];
+
+export {
+  getData,
+  instance,
+  timeFormat,
+  getMarkedTimes,
+  getRawData,
+  columns,
+  getViews,
+  markRow,
+  getRawViews,
+};
