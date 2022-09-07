@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Table from "./components/Table";
+import Table from "./components/TableData/Table";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { columns, getData } from "./utils/Util";
-import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/Admin/AdminPanel";
 
 function App() {
   const [items, setItems] = useState([]);
