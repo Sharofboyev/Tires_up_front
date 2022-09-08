@@ -28,10 +28,12 @@ function App() {
         <Route
           path="/tiresecond"
           element={
-            <Table
-              columns={columns}
-              items={items}
-            />
+            <React.Fragment>
+              <Table
+                columns={columns}
+                items={items}
+              />
+            </React.Fragment>
           }
         />
         <Route

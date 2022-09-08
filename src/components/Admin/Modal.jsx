@@ -11,8 +11,13 @@ class Modal extends Component {
       text: event.target.value,
     });
   };
+  handleSubmit = () => {
+    console.log(this.state.text);
+    this.props.clickHandler();
+  };
   handleEsc = (event) => {
     if (event.key === "Escape") this.props.clickHandler();
+    if (event.key === "Enter" && event.ctrlKey) this.handleSubmit();
   };
   render() {
     return (
@@ -37,6 +42,7 @@ class Modal extends Component {
                 className="btn-close"
                 data-mdb-dismiss="modal"
                 aria-label="Close"
+                autoFocus
                 onClick={this.props.clickHandler}
               ></button>
             </div>
@@ -58,6 +64,7 @@ class Modal extends Component {
               <button
                 type="button"
                 className="btn btn-primary"
+                onClick={this.handleSubmit}
               >
                 Save changes
               </button>
