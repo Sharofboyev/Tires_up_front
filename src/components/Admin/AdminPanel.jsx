@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
+import data from "../../utils/views.json";
 
 class AdminPanel extends Component {
   constructor(props) {
@@ -17,18 +18,19 @@ class AdminPanel extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-modal">
         <button
-          type="button"
           className="btn btn-primary"
-          data-mdb-toggle="modal"
-          data-mdb-target="#exampleModal"
+          type="button"
           onClick={this.modalButtonHandle}
         >
           Launch demo modal
         </button>
         {this.state.openModal ? (
-          <Modal clickHandler={this.modalButtonHandle}></Modal>
+          <Modal
+            clickHandler={this.modalButtonHandle}
+            text={data[0].query}
+          ></Modal>
         ) : (
           <></>
         )}

@@ -1,23 +1,18 @@
 import React, { Component } from "react";
 import Form from "./Form";
-import data from "../../utils/views.json";
 
 class Modal extends Component {
   state = {
-    text: data[0].query,
+    text: this.props.text,
   };
+
   handleInput = (event) => {
     this.setState({
       text: event.target.value,
     });
   };
-
-  escHandler = (event) => {
-    if (event.key === "Escape") {
-      this.props.clickHandler(event);
-    } else {
-      return;
-    }
+  handleEsc = (event) => {
+    if (event.key === "Escape") this.props.clickHandler();
   };
   render() {
     return (
@@ -25,7 +20,8 @@ class Modal extends Component {
         className="modal"
         tabIndex="-1"
         onClick={this.props.clickHandler}
-        onKeyDown={this.escHandler}
+        onKeyDown={this.handleEsc}
+        id="#exampleModal"
       >
         <div className="modal-dialog modal-lg">
           <div
@@ -56,7 +52,6 @@ class Modal extends Component {
                 className="btn btn-secondary"
                 data-mdb-dismiss="modal"
                 onClick={this.props.clickHandler}
-                handleChange={this.handleInput}
               >
                 Close
               </button>
