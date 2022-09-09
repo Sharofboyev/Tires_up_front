@@ -42,7 +42,6 @@ class Modal extends Component {
                 className="btn-close"
                 data-mdb-dismiss="modal"
                 aria-label="Close"
-                autoFocus
                 onClick={this.props.clickHandler}
               ></button>
             </div>
