@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { Input } from "mdb-ui-kit"; // modul
 
 class Form extends Component {
-  state = {
-    views: [],
-    gotViews: false,
-  };
   componentDidMount() {
     document.querySelectorAll(".form-outline").forEach((formOutline) => {
       new Input(formOutline).init();
@@ -19,6 +15,7 @@ class Form extends Component {
     return (
       <div className="form-outline">
         <textarea
+          autoFocus
           type="text"
           id="form16"
           rows="8"
