@@ -24,7 +24,6 @@ class Form extends Component {
           maxLength="1024"
           value={this.props.text}
           onChange={this.props.handleChange}
-          autoFocus={this.props.autoFocus}
         />
         <label
           className="form-label"
