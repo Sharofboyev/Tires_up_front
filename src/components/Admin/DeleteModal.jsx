@@ -1,30 +1,31 @@
 import React, { Component } from "react";
-import Form from "./Form";
 
-class Modal extends Component {
+class DeleteModal extends Component {
   state = {
-    text: this.props.text,
+    deleteButtonDisabled: false,
   };
 
-  handleInput = (event) => {
-    this.setState({
-      text: event.target.value,
-    });
-  };
-  handleSubmit = () => {
-    console.log(this.state.text);
-    this.props.clickHandler();
-  };
   handleEsc = (event) => {
-    if (event.key === "Escape") this.props.clickHandler();
-    if (event.key === "Enter" && event.ctrlKey) this.handleSubmit();
+    if (event.key === "Escape") this.props.modalClose();
+    if (
+      event.key === "Enter" &&
+      event.ctrlKey &&
+      !this.state.deleteButtonDisabled
+    ) {
+      this.props.handleDelete();
+    }
+  };
+  handleDelete = () => {
+    this.setState({
+      deleteButtonDisabled: true,
+    });
+    this.props.handleDelete();
   };
   render() {
     return (
       <div
         className="modal"
         tabIndex="-1"
-        onClick={this.props.clickHandler}
         onKeyDown={this.handleEsc}
         id="#exampleModal"
       >
@@ -36,37 +37,33 @@ class Modal extends Component {
             }}
           >
             <div className="modal-header ">
-              <h5 className="modal-title">Modal title</h5>
+              <h5 className="modal-title">Delete view</h5>
               <button
                 type="button"
                 className="btn-close"
                 data-mdb-dismiss="modal"
-                aria-label="Close"
+                onClick={this.props.modalClose}
                 autoFocus
-                onClick={this.props.clickHandler}
               ></button>
             </div>
-            <div className="modal-body">
-              <Form
-                text={this.state.text}
-                handleChange={this.handleInput}
-              ></Form>
+            <div className="modal-body display-6">
+              Are you sure to delete this view?
             </div>
             <div className="modal-footer">
               <button
                 type="button"
                 className="btn btn-secondary"
                 data-mdb-dismiss="modal"
-                onClick={this.props.clickHandler}
+                onClick={this.props.modalClose}
               >
-                Close
+                Cancel
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
-                onClick={this.handleSubmit}
+                className="btn btn-danger btn-primary"
+                onClick={this.handleDelete}
               >
-                Save changes
+                Delete
               </button>
             </div>
           </div>
@@ -76,4 +73,4 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+export default DeleteModal;

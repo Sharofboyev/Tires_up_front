@@ -21,18 +21,19 @@ class Form extends Component {
         <textarea
           type="text"
           id="form16"
-          rows="6"
+          rows="8"
           className="form-control"
           data-mdb-showcounter="true"
           maxLength="1024"
           value={this.props.text}
           onChange={this.props.handleChange}
+          autoFocus={this.props.autoFocus}
         />
         <label
           className="form-label"
           htmlFor="form16"
         >
-          View query
+          Database query
         </label>
         <div className="form-helper"></div>
       </div>

@@ -64,3 +64,30 @@ table {
 .modal-dialog {
   width: 70em;
 }
+
+.view-cell {
+  font-size: 2em;
+}
+
+.time {
+  width: 20em;
+}
+
+.colSpan {
+  text-align: center;
+}
+
+.input-group {
+  flex-direction: column;
+}
+
+.Button {
+  font-size: 0.5em;
+  background: #f1f3f4;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 100px;
+  height: 100px;
+  width: 100px;
+}

@@ -1,29 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import Row from "./Row";
 import Thead from "./Thead";
+import { getData } from "../../utils/Util";
 
-function Table(props) {
-  const { columns, items } = props;
-  return (
-    <table className="Table">
-      <Thead columns={columns}></Thead>
-      <tbody>
-        {items.map((item) => {
-          let readyRow = {};
-          for (let i = 0; i < columns.length; i++) {
-            readyRow[columns[i].Header] = columns[i].Picker(item);
-          }
-          return (
-            <Row
-              row={readyRow}
-              id={readyRow.id}
-              key={readyRow.id}
-            />
-          );
-        })}
-      </tbody>
-    </table>
-  );
+class Table extends Component {
+  state = {
+    items: [],
+  };
+
+  componentDidMount = () => {
+    getData("tiresecond").then((data) => {
+      this.setState({
+        items: data,
+      });
+    });
+  };
+  render() {
+    let { items } = this.state;
+    let columns = [];
+    if (items.length > 0) {
+      columns = Object.keys(items[0]);
+      columns.push("Time");
+    }
+    return (
+      <table className="Table">
+        <Thead columns={columns}></Thead>
+        <tbody>
+          {items.map((item) => {
+            return (
+              <Row
+                row={item}
+                id={item.PVI}
+                key={item.PVI}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    );
+  }
 }
 
 export default Table;

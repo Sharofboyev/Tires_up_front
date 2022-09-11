@@ -1,20 +1,16 @@
 import axios from "axios";
 import moment from "moment";
 import data from "./rawData.json";
-import views from "./views.json";
 
 const instance = axios.create({
   baseURL: "http://localhost:2022/",
   timeout: 15000,
 });
 
-async function getData() {
+async function getData(viewName) {
   try {
-    let resp = await instance.get("/tiresecond/rows");
-    let data = resp.data.sort((a, b) => {
-      return a.CSN > b.CSN;
-    });
-    return data;
+    let resp = await instance.get(`/${viewName}/rows`);
+    return resp.data;
   } catch (err) {
     return [];
   }
@@ -70,28 +66,6 @@ function getRawData() {
     }, 1000);
   });
 }
-
-function getRawViews() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(views);
-    }, 1000);
-  });
-}
-
-async function getViews() {
-  try {
-    let resp = await instance.get("/view");
-    let data = resp.data.sort((a, b) => {
-      return a.CSN > b.CSN;
-    });
-    return data;
-  } catch (err) {
-    console.log(err.message);
-    return [];
-  }
-}
-
 async function markRow(viewName, pvi, done) {
   let resp = await instance.put(`${viewName}/row`, {
     pvi: Number(pvi),
@@ -166,7 +140,5 @@ export {
   getMarkedTimes,
   getRawData,
   columns,
-  getViews,
   markRow,
-  getRawViews,
 };

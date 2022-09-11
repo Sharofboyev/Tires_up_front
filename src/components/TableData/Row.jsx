@@ -7,9 +7,10 @@ class Row extends React.Component {
     super(props);
     this.state = {
       marked: false,
-      done: this.props.row.Bajarildi,
+      done: this.props.row.Bajarildi === "True",
       collapsed: true,
-      times: this.props.row.Time,
+      times: [],
+      timesCalled: false,
     };
   }
   id = 1;
@@ -30,11 +31,12 @@ class Row extends React.Component {
 
   handleCollapseClick = async (event) => {
     event.stopPropagation();
-    if (this.state.collapsed && this.state.times.length === 0) {
+    if (this.state.collapsed && !this.state.timesCalled) {
       getMarkedTimes(this.props.id).then((data) => {
         this.setState({
           times: data,
           collapsed: !this.state.collapsed,
+          timesCalled: true,
         });
       });
     } else this.setState({ collapsed: !this.state.collapsed });
@@ -59,6 +61,7 @@ class Row extends React.Component {
         key={this.props.id}
       >
         {Object.keys(this.props.row).map((key) => {
+          if (key === "PVI") return null;
           if (key === "Bajarildi") {
             return (
               <Cell
@@ -73,7 +76,7 @@ class Row extends React.Component {
           } else if (key === "Time") {
             return (
               <Cell
-                value={this.props.row[key]}
+                value={this.state.times}
                 key={this.id++}
                 width="35px"
                 columnName={key}

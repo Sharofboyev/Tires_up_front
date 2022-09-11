@@ -1,5 +1,4 @@
 import React from "react";
-import "./Button.css";
 import { markRow } from "../../utils/Util";
 
 class Button extends React.Component {
