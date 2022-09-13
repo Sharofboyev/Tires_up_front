@@ -12,7 +12,7 @@ function App() {
           element={<AdminPanel></AdminPanel>}
         />
         <Route
-          path="/tiresecond"
+          path="/:viewName"
           element={<Table />}
         />
       </Routes>

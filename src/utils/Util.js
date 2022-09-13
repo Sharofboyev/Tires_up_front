@@ -49,9 +49,11 @@ function timeFormat(date) {
     .padStart(2, 0)}:${momentDate.second().toString().padStart(2, 0)}`;
 }
 
-async function getMarkedTimes(PVI) {
+async function getMarkedTimes(PVI, viewName) {
   try {
-    let resp = await instance.get("/tiresecond/time", { params: { pvi: PVI } });
+    let resp = await instance.get(`/${viewName}/time`, {
+      params: { pvi: PVI },
+    });
     return resp.data;
   } catch (err) {
     console.log(err.message);

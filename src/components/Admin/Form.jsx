@@ -15,7 +15,7 @@ class Form extends Component {
     return (
       <div className="form-outline">
         <textarea
-          autoFocus
+          autoFocus={this.props.autoFocus}
           type="text"
           id="form16"
           rows="8"

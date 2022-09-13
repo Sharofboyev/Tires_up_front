@@ -76,7 +76,7 @@ class InsertModal extends Component {
                 <div className="form-outline">
                   <input
                     className="form-control"
-                    autoFocus
+                    autoFocus={true}
                     onChange={(event) =>
                       this.handleInput("name", event.target.value)
                     }
