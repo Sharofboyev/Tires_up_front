@@ -9,12 +9,13 @@ class Button extends React.Component {
     };
   }
   onClickHandler = async (event) => {
+    const { viewName, id, done } = this.props;
     event.stopPropagation();
     this.setState({
       disabled: true,
     });
     try {
-      let resp = await markRow("tiresecond", this.props.id, !this.props.done);
+      let resp = await markRow(viewName, id, !done);
       this.props.onButtonClickHandler(resp.data);
     } catch (err) {}
     this.setState({

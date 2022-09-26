@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "autoprefixer": "^10.4.5",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "dotenv": "^16.0.1",
@@ -40,8 +39,5 @@
   },
   "browser": {
     "child_process": false
-  },
-  "overrides": {
-    "autoprefixer": "10.4.5"
   }
 }

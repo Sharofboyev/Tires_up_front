@@ -11,6 +11,7 @@ export class Cell extends React.Component {
             done={this.props.done}
             onButtonClickHandler={this.props.onButtonClickHandler}
             id={this.props.id}
+            viewName={this.props.viewName}
           />
         ) : this.props.columnName === "Time" ? (
           <Image
@@ -19,6 +20,8 @@ export class Cell extends React.Component {
             width="50px"
             height="50px"
           />
+        ) : this.props.columnName === "CSN" ? (
+          this.props.value.substring(3)
         ) : (
           this.props.value
         )}

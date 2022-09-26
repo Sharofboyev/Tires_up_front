@@ -4,7 +4,7 @@ import Thead from "./Thead";
 import { getData } from "../../utils/Util";
 import { useParams } from "react-router-dom";
 
-function Table(props) {
+function Table() {
   const [items, setItems] = useState([]);
   const params = useParams();
   useEffect(() => {

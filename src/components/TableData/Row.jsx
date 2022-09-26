@@ -32,7 +32,7 @@ class Row extends React.Component {
   handleCollapseClick = async (event) => {
     event.stopPropagation();
     if (this.state.collapsed && !this.state.timesCalled) {
-      getMarkedTimes(this.props.id).then((data) => {
+      getMarkedTimes(this.props.id, this.props.viewName).then((data) => {
         this.setState({
           times: data,
           collapsed: !this.state.collapsed,
@@ -71,6 +71,7 @@ class Row extends React.Component {
                 id={this.props.id}
                 onButtonClickHandler={this.onButtonClickHandler}
                 columnName={key}
+                viewName={this.props.viewName}
               />
             );
           } else if (key === "Time") {
